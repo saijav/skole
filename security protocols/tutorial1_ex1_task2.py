@@ -31,13 +31,12 @@ def decrypt(ciphertext, k):
 
 
 def caesar_cipher():
-    # Input shift number K
     while True:
         k = validate_k(input("Enter the shift number K (0-25): "))
         if k is not None:
             break
 
-    # Choose operation mode: Encrypt or Decrypt
+    #choose operation
     mode = input("Do you want to (E)ncrypt or (D)ecrypt? ").strip().lower()
 
     if mode == 'e':
@@ -57,9 +56,4 @@ def caesar_cipher():
     else:
         print("Invalid mode. Please select either 'E' for encrypt or 'D' for decrypt.")
 
-# Run the Caesar Cipher program
-x = range(10)
-for n in x:
-    caesar_cipher()
-    n+=1
-
+caesar_cipher()
