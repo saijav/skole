@@ -6,13 +6,11 @@ import time
 def main():
     name = input("Enter name: ")
 
-    # Generate ECC private and public keys
     private_key = ec.generate_private_key(
         ec.SECP384R1(), backend=default_backend()
     )
     public_key = private_key.public_key()
 
-    # Save the private key
     with open(f"{name}_ECC_Private_Key.pem", "wb") as f:
         f.write(private_key.private_bytes(
             encoding=serialization.Encoding.PEM,
@@ -20,7 +18,6 @@ def main():
             encryption_algorithm=serialization.NoEncryption()
         ))
 
-    # Save the public key
     with open(f"{name}_ECC_Public_Key.pem", "wb") as f:
         f.write(public_key.public_bytes(
             encoding=serialization.Encoding.PEM,
@@ -31,7 +28,6 @@ def main():
 
     message = "This is a one paragraph of text that will be encrypted"
 
-    # Signing (acting as encryption)
     start_time = time.time()
     signature = private_key.sign(
         message.encode(),
@@ -40,7 +36,6 @@ def main():
     end_time = time.time()
     print(f"ECC encryption time: {end_time - start_time:.6f} seconds")
 
-    # Verification (acting as decryption)
     start_time = time.time()
     try:
         public_key.verify(
